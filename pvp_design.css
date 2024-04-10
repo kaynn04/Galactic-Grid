@@ -1,0 +1,518 @@
+body {
+    background-color: rgb(27, 27, 27);
+    user-select: none;
+    overflow: hidden;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(6, minmax(100px, 1fr));
+    grid-template-rows: repeat(5, minmax(100px, 1fr));
+    top: 0;
+    right: 0;
+    gap: 1px;
+    width: 50% auto;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 10px;
+    box-shadow: 5px 10px 18px white;
+    background-color: white;
+    place-content: center;
+    max-width: 90vw;    
+}
+.cell{
+    display: flex;
+    justify-content: center;
+    border: 1px solid#ccc;
+    padding: 10px;
+    text-align: center;
+    background-color:black;
+    min-width: 0; 
+    flex-grow: 1;
+    flex-shrink: 1;  
+    align-items: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+/* settings.css */
+
+.settings-icon {
+    position: fixed;
+    top: 30px;
+    left: 20px;
+    cursor: pointer;
+}
+.settings-menu {
+    position: fixed;
+    top: 0;
+    left: -300px; /* Initial position off-screen */
+    width: 250px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: left 0.5s ease-in-out;
+    z-index: 1000;
+}
+.settings-menu a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 20px); /* Subtract padding to occupy full width */
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: "orbitron", sans-serif;
+    background-color: transparent;
+    color: white;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, font-size 0.3s ease-in-out;
+    text-decoration: none; /* Remove default underline for links */
+    border-radius: 10px;
+    margin-top: 135px;
+    font-size: 25px;
+}
+.settings-menu a.close-btn {
+    border: 2px solid white;
+}
+.settings-menu a.close-btn:hover {
+    background-color: blue; /* Change the background color on hover */
+    color: white; /* Reset the text color on hover */
+}
+.settings-menu a:hover {
+    color: rgb(25, 0, 255);
+}
+
+/*td {
+	border:  2px solid #ffffff;
+	height:  100px;
+	width:  100px;
+	text-align:  center;
+	vertical-align:  middle;
+	font-family:  Verdana, Geneva, Tahoma, sans-serif;
+	font-size:  70px;
+	cursor: pointer;
+}
+
+.menu {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: black;
+    margin-top: -20px;
+}
+
+table {
+    width: 100%;
+    max-width: 100px;
+	border-collapse: collapse;
+    margin: auto; 
+    border-radius: 10px;
+    box-shadow: 0 0 30px white;
+    background-color: black;
+}
+
+@media (max-width: 767px) {
+    table {
+        margin-left: -150px;
+    }
+}
+
+table tr:first-child td {
+	border-top: 0;
+}
+
+table tr:last-child td {
+	border-bottom: 0;
+}
+
+table tr td:first-child {
+	border-left: 0;
+}
+
+table tr td:last-child {
+	border-right: 0;
+}*/
+
+.endgame {
+  display: none;
+  width: 200px;
+  top: 350px;
+  background-color: rgb(25, 0, 255);
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 50px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  font-size: 2em;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -100;
+    background-color: transparent;
+}
+
+.score {
+    width: 50%;
+
+    color: white;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    margin: auto;
+
+    border: 1px solid rgba(0, 128, 0, 0);
+}
+
+
+#player_n{
+    grid-area: one;
+}
+#vs {
+    grid-area: two;
+}
+#ai_n{
+    grid-area: three;
+}
+#player_score{
+    grid-area: four;
+}
+#vs2{
+    grid-area: five;
+}
+#ai_score{
+    grid-area: six;
+}
+
+.score_board {
+    display: grid;
+    gap: 70px;
+    padding: 0;
+    grid-template-areas: 
+    'one two three'
+    'four five six';
+    text-align: center;
+    color: white;
+    max-width: 50%;
+    position: fixed;
+    top: 30px; /* Adjust the top position as needed */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally using transform */
+    font-family: "orbitron", sans-serif;
+    font-size: 18px;
+}
+
+.gri {
+    background-color: rgba(0, 0, 0, 0);
+    width: 100%; /* Make elements take full width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    max-width: 250px; /* Set a maximum width for larger screens */
+    margin: 0 auto; /* Center the elements within the container */
+}
+
+.back {
+    margin-top: 190px;
+    bottom: 0;
+    position: absolute;
+    width: 200px; 
+    border: 3px solid rgb(255, 0, 0);
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.603);
+    transition: all 0.1s ease-in-out;
+    font-size: 20px;
+    height: 60px;
+    top: 50%;
+    left: 50%;
+    margin-left: -105px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: crosshair;
+}
+
+.back:hover {
+    box-shadow: 0 0 10px 5px white;
+}
+
+@media (max-width: 1610px) {
+    .score_board {
+        max-width: 90%; 
+        left: 50%; 
+        top: 50px; 
+        transform: translateX(-50%);
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 1280px) {
+    .score_board {
+        gap: 40px;
+        max-width: 90%; 
+        left: 50%; 
+        top: 5px; 
+        transform: translateX(-50%);
+        font-size: 12px; 
+    }
+    .settings-icon {
+        top: 10px;
+        left: 10px;
+        cursor: pointer;
+    }
+    .container {
+        grid-template-columns: repeat(6, minmax(85px, 1fr)); 
+        grid-template-rows: repeat(5, minmax(85px, 1fr));
+        margin-top: 50px;
+        margin-right: auto;
+        margin-left: auto;  
+    }
+    .settings-menu a {
+        margin-top: 100px;
+        font-size: 20px;
+    }
+    .settings-icon img {
+        content: url('images/settings-icon-32.png');
+    }
+}
+
+@media (max-width: 1024px) {
+    .score_board {
+        gap: 40px;
+        max-width: 90%; 
+        left: 50%; 
+        top: 5px; 
+        transform: translateX(-50%);
+        font-size: 12px; 
+    }
+    .settings-icon {
+        top: 10px;
+        left: 10px;
+        cursor: pointer;
+    }
+    .container {
+        grid-template-columns: repeat(6, minmax(65px, 1fr)); 
+        grid-template-rows: repeat(5, minmax(65px, 1fr));
+        margin-top: 50px;
+        margin-right: auto;
+        margin-left: auto;  
+    }
+    .settings-menu a {
+        margin-top: 75px;
+        font-size: 20px;
+    }
+    .settings-icon img {
+        content: url('images/settings-icon-32.png');
+    }
+}
+
+
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: repeat(6, minmax(40px, 1fr)); 
+        grid-template-rows: repeat(5, minmax(40px, 1fr)); 
+    }
+    .cell{
+        padding: 3px; 
+    }
+}
+@media (max-width: 800px) {
+    .container {
+        grid-template-columns: repeat(6, minmax(30px, 1fr)); 
+        grid-template-rows: repeat(5, minmax(30px, 1fr)); 
+    }
+    .cell {
+        padding: 3px; 
+    }
+}
+
+@media (max-width: 609px) {
+    .score_board {
+        max-width: 90%; 
+        left: 50%; 
+        top: 10px; 
+        transform: translateX(-50%); 
+    }
+}
+
+
+@media (max-width: 767px) {
+    .container {
+        grid-template-columns: repeat(6, minmax(25px, 1fr)); 
+        grid-template-rows: repeat(5, minmax(25px, 1fr)); 
+    }
+    .cell {
+        padding: 3px; 
+    }
+}
+
+@media (max-width: 479px) {
+    .container {
+        grid-template-columns: repeat(6, minmax(20px, 1fr)); 
+        grid-template-rows: repeat(5, minmax(20px, 1fr)); 
+    }
+    .cell {
+        padding: 2px; 
+    }
+}
+
+@media (max-width: 430px) {
+    .container {
+        grid-template-columns: repeat(6, minmax(60px, 1fr)); 
+        grid-template-rows: repeat(5, minmax(70px, 1fr));
+        margin-top: 80px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .cell {
+        padding: 2px; 
+    }
+    .score_board {
+        gap: 20px;
+        top: 165px; /* Adjust the top position as needed */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Center horizontally using transform */
+        font-size: 15px;
+    }
+    .gri {
+        background-color: rgba(0, 0, 0, 0);
+        width: 100%; /* Make elements take full width */
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        max-width: 250px; /* Set a maximum width for larger screens */
+        margin: 0 auto; /* Center the elements within the container */
+    }
+    .settings-icon img {
+        content: url('images/settings-icon-32.png');
+    }
+    .settings-menu a {
+        margin-top: 120px;
+        font-size: 20px;
+    }
+}
+
+
+
+@media (max-width: 414px) {
+    .container {
+        grid-template-columns: repeat(6, minmax(60px, 1fr)); 
+        grid-template-rows: repeat(5, minmax(70px, 1fr));
+        margin-top: 80px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .cell {
+        padding: 2px; 
+    }
+    .score_board {
+        gap: 20px;
+        top: 160px; /* Adjust the top position as needed */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Center horizontally using transform */
+        font-size: 15px;
+    }
+    .gri {
+        background-color: rgba(0, 0, 0, 0);
+        width: 100%; /* Make elements take full width */
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        max-width: 250px; /* Set a maximum width for larger screens */
+        margin: 0 auto; /* Center the elements within the container */
+    }
+    .settings-icon img {
+        content: url('images/settings-icon-32.png');
+    }
+    .settings-menu a {
+        margin-top: 120px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 390px) {
+    .container {
+        grid-template-columns: repeat(6, minmax(55px, 1fr)); 
+        grid-template-rows: repeat(5, minmax(70px, 1fr));
+        margin-top: 80px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .cell {
+        padding: 2px; 
+    }
+    .score_board {
+        gap: 20px;
+        top: 140px; /* Adjust the top position as needed */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Center horizontally using transform */
+        font-size: 15px;
+    }
+    .gri {
+        background-color: rgba(0, 0, 0, 0);
+        width: 100%; /* Make elements take full width */
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        max-width: 250px; /* Set a maximum width for larger screens */
+        margin: 0 auto; /* Center the elements within the container */
+    }
+    .settings-icon img {
+        content: url('images/settings-icon-32.png');
+    }
+    .settings-menu a {
+        margin-top: 120px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 375px) {
+    .container {
+        grid-template-columns: repeat(6, minmax(55px, 1fr)); 
+        grid-template-rows: repeat(5, minmax(55px, 1fr));
+        margin-top: 80px;
+        margin-right: auto;
+        margin-left: auto;
+         
+    }
+    .cell {
+        padding: 2px; 
+    }
+    .score_board {
+        gap: 20px;
+        top: 90px; /* Adjust the top position as needed */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Center horizontally using transform */
+        font-size: 15px;
+    }
+    .gri {
+        background-color: rgba(0, 0, 0, 0);
+        width: 100%; /* Make elements take full width */
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        max-width: 250px; /* Set a maximum width for larger screens */
+        margin: 0 auto; /* Center the elements within the container */
+    }
+    .settings-icon img {
+        content: url('images/settings-icon-32.png');
+    }
+    .settings-menu a {
+        margin-top: 80px;
+        font-size: 17px;
+    }
+}
+
+
+
